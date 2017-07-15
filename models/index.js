@@ -6,5 +6,3 @@ Page.belongsTo(User, {as: 'author'});
 User.hasMany(Page, {foreignKey: 'authorId'});
 
 
-
-

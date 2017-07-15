@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var wikiRouter = require('./routes/wiki');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 
 app.use(morgan('dev'));
 
@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/public'));
 
 app.use('/wiki', wikiRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 
 app.get('/', function (req, res) {
     res.redirect('/wiki');

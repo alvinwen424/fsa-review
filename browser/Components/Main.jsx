@@ -1,34 +1,37 @@
 import React from 'react';
 import store from '../store';
-import { fetchPages } from '../pages';
+import {
+  fetchPages
+} from '../pages';
+import Add from './Add.jsx';
 
 export default class Main extends React.Component {
-constructor(){
+  constructor() {
     super();
     this.state = store.getState();
-}
+  }
 
-componentDidMount() {
+  componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
     store.dispatch(fetchPages());
-}
+  }
 
-componentWillUnmount() {
+  componentWillUnmount() {
     this.unsubscribe();
-}
+  }
 
-render(){
-    console.log(this.state);
+  render() {
     return (
-        <div>
+      <div>
             <ul>
             {this.state.pages.pages && this.state.pages.pages.map(page => {
                 return (
                  <li key={page.id}>{page.title}</li>
                  )
             })}
-            </ul>
+          </ul>
+          <Add />
         </div>
     )
-}
+  }
 }

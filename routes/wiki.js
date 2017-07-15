@@ -7,20 +7,33 @@ module.exports = router
 
 
 router.get('/', (req, res, next) => {
-    Page.findAll()
+  Page.findAll()
     .then(pages => {
-        res.json(pages)
+      res.json(pages)
     })
     .catch(next);
 })
 
-router.get('/:id', (req,res,next) => {
-    Page.findOne({
-        where: {id: req.params.id},
-        include: [{model: User, as: 'author'}]
+router.get('/:id', (req, res, next) => {
+  Page.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [{
+        model: User,
+        as: 'author'
+      }]
     })
     .then(page => {
-        res.json(page)
+      res.json(page)
+    })
+    .catch(next);
+})
+
+router.post('/', (req, res, next) => {
+  Page.create(req.body)
+    .then(page => {
+      res.json(page)
     })
     .catch(next);
 })
