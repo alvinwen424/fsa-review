@@ -129,7 +129,7 @@ describe('Page model', function () {
                     });
             });
 
-            xit('gets other pages with any common tags', function () {
+            it('gets other pages with any common tags', function () {
                 return berryPage.findSimilar()
                     .then(function (similar) {
                         expect(similar).to.have.lengthOf(2);
@@ -138,7 +138,7 @@ describe('Page model', function () {
                     });
             });
 
-            xit('does not get other pages without any common tags', function () {
+            it('does not get other pages without any common tags', function () {
                 return bananaPage.findSimilar()
                     .then(function (similar) {
                         expect(similar).to.have.lengthOf(1);
@@ -152,7 +152,7 @@ describe('Page model', function () {
 
     describe('Validations', function () {
 
-        xit('errors without title', function () {
+        it('errors without title', function () {
             var page = Page.build({});
             return page
                 .validate()
@@ -162,7 +162,7 @@ describe('Page model', function () {
                 });
         });
 
-        xit('errors without content', function () {
+        it('errors without content', function () {
             var page = Page.build({});
             return page
                 .validate()
@@ -172,7 +172,7 @@ describe('Page model', function () {
                 });
         });
 
-        xit('errors given an invalid status', function () {
+        it('errors given an invalid status', function () {
             var page = Page.build({
                 title: 'kjkja',
                 content: 'asdjka',
@@ -188,7 +188,7 @@ describe('Page model', function () {
                 });
         });
 
-        xit('will be valid with the above stuff', function () {
+        it('will be valid with the above stuff', function () {
             var page = Page.build({
                 title: 'Foobar',
                 content: 'Foos and bars but together'
@@ -200,7 +200,7 @@ describe('Page model', function () {
 
     describe('Hooks', function () {
 
-        xit('it sets urlTitle based on title before validating', function () {
+        it('it sets urlTitle based on title before validating', function () {
 
             var page = Page.build({
                 title: 'The Who',

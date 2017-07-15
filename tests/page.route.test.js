@@ -24,7 +24,7 @@ describe('http requests', function () {
 
     describe('GET /wiki', function () {
 
-        xit('responds with 200', function () {
+        it('responds with 200', function () {
             return agent.get('/wiki').expect(200);
         });
 
@@ -32,7 +32,7 @@ describe('http requests', function () {
 
     describe('GET /wiki/add', function () {
 
-        xit('responds with 200', function () {
+        it('responds with 200', function () {
             return agent.get('/wiki/add').expect(200);
         });
 

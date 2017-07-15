@@ -1,4 +1,9 @@
-const { STRING, TEXT, ENUM, ARRAY } = require('sequelize');
+const {
+  STRING,
+  TEXT,
+  ENUM,
+  ARRAY
+} = require('sequelize');
 const db = require('./index')
 
 const Page = db.define('page', {
@@ -12,7 +17,7 @@ const Page = db.define('page', {
   },
   content: {
     type: TEXT,
-    allowNull: false  
+    allowNull: false
   },
   status: {
     type: ENUM('open', 'closed')
@@ -20,34 +25,45 @@ const Page = db.define('page', {
   tags: {
     type: ARRAY(TEXT)
   }
-},
-{
+}, {
   hooks: {
-    beforeValidate: function(page) {
+    beforeValidate: function (page) {
       if (page.title) {
         page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
       }
     }
   },
   getterMethods: {
-    route: function() {
+    route: function () {
       return '/wiki/' + this.urlTitle;
     }
   },
   classMethods: {
-    findByTag: function(tag) {
-      return Page.findAll({ where: {
-        tags: {
-          $overlap: [tag]
+    findByTag: function (tag) {
+      return Page.findAll({
+        where: {
+          tags: {
+            $overlap: [tag]
+          }
         }
-      }})
+      })
     }
   },
   instanceMethods: {
-    findSimilar: function() {
-      
+    findSimilar: function () {
+      return Page.findAll({
+        where: {
+          tags: {
+            $overlap: this.tags
+          },
+          id: {
+            $ne: this.id
+          }
+        }
+      })
     }
   }
 })
+
 
 module.exports = Page;
