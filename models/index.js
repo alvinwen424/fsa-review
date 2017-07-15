@@ -1,6 +1,10 @@
-var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:5432/wikistack', {
-    logging: false
-});
+const db = require('./db');
+const Page = require('./page');
+const User = require('./user');
 
-module.exports = db;
+Page.belongsTo(User, {as: 'author'});
+User.hasMany(Page, {foreignKey: 'authorId'});
+
+
+
+

@@ -3,9 +3,9 @@ var Page = require('./models/page')
 var User = require('./models/user');
 var app = require('./app');
 
-User.sync()
+User.sync({force: false})
     .then(function () {
-        return Page.sync();
+        return Page.sync({force: false});
     })
     .then(function () {
         app.listen(3001, function () {

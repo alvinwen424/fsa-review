@@ -4,7 +4,7 @@ const {
   ENUM,
   ARRAY
 } = require('sequelize');
-const db = require('./index')
+const db = require('./db')
 
 const Page = db.define('page', {
   title: {
